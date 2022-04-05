@@ -1,0 +1,32 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+      <a href="/client/new" class="btn btn-outline-success mb-3">Add New Client</a>
+      <div class="table-responsive">
+        <table class="table table-hover table-nowrap">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Tag</th>
+              <th scope="col">Timezone</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="c clients">
+              <td>${c.client.id}</td>
+              <td>${c.client.phone}</td>
+              <td>${c.client.tag}</td>
+              <td>${c.client.timezone}</td>
+              <td tal:switch="c.status">
+                <div tal:case="False">
+                    <a href="/client/edit/${c.client.id}" class="btn btn-outline-primary"><i class="bi bi-pen-fill"></i></a>
+                    <a href="/client/remove/${c.client.id}" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

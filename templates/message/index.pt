@@ -1,0 +1,29 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+      <div class="table-responsive">
+        <table class="table table-hover table-nowrap">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Mailing</th>
+              <th scope="col">Client</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="m messages">
+              <td>${m.id}</td>
+              <td>${m.created_date}</td>
+              <td>${m.mailing_id}</td>
+              <td>${m.client_id}</td>
+              <td  tal:switch="m.status">
+                <span tal:case="True" class="badge bg-success">${m.status}</span>
+                <span tal:case="False" class="badge bg-danger">${m.status}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

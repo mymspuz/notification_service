@@ -1,0 +1,26 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+      <div class="table-responsive">
+        <table class="table table-hover table-nowrap">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">All message</th>
+              <th scope="col">Ready message</th>
+              <th scope="col">Error message</th>
+              <th scope="col">Report</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="m mailings">
+              <td>${m.id}</td>
+              <td>${m.sum}</td>
+              <td><span class="badge bg-success">${m.ready}</span></td>
+              <td><span class="badge bg-danger">${m.error}</span></td>
+              <td><a href="/report/${m.id}"><i class="bi bi-bar-chart-fill"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

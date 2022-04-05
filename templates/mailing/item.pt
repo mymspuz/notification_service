@@ -1,0 +1,56 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+      <div tal:condition="error" class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <div>
+          ${ error }
+        </div>
+      </div>
+      <form class="mb-5" action="" method="POST">
+        <div class="card">
+          <div class="card-body pb-0">
+            <div class="mb-7">
+              <h4 class="mb-1">Add/Edit Mailing</h4>
+              <p class="text-sm text-muted">Enter parameters mailing.</p>
+            </div>
+            <div class="row g-5 mb-5">
+              <div class="col-md-3">
+                <div>
+                  <label class="form-label">Date Start</label>
+                  <input name="date-start" type="datetime-local" class="form-control" value="${ start_date_html }" required>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div>
+                  <label class="form-label">Date End</label>
+                  <input name="date-end" type="datetime-local" class="form-control" value="${ end_date_html }" required>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div>
+                  <label class="form-label">Code Phone</label>
+                  <input name="code" type="number" minlength="3" min="100" max="999" class="form-control" value="${ filters['code'] }">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div>
+                  <label class="form-label">Tag</label>
+                  <input name="tag" type="text" class="form-control" value="${ filters['tag'] }">
+                </div>
+              </div>
+              <div class="col-12">
+                <div>
+                  <label class="form-label">Message</label>
+                  <textarea name="message" class="form-control" required>${ message }</textarea>
+                  <input name="id" type="hidden" class="form-control" value="${ id }">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-end">
+            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>

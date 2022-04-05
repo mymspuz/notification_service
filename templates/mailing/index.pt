@@ -1,0 +1,50 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+      <a href="/mailing/new" class="btn btn-outline-success mb-3">Add New Mailing</a>
+      <div class="table-responsive">
+        <table class="table table-hover table-nowrap">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Completion</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="m mailings">
+              <td>${m.mailing.id}</td>
+              <td>${m.mailing.start_date}</td>
+              <td>${m.mailing.end_date}</td>
+              <td tal:condition="m.wait"><span class="badge bg-secondary">Wait</span></td>
+              <td tal:condition="m.ready"><span class="badge bg-${m.style}">Ready</span></td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">${m.completion}%</span>
+                  <div>
+                    <div class="progress" style="width:100px">
+                      <div
+                        class="progress-bar bg-${m.style}"
+                        role="progressbar"
+                        aria-valuenow="${m.completion}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width:${m.completion}%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <a tal:condition="m.wait" href="/mailing/edit/${m.mailing.id}" class="btn btn-outline-primary"><i class="bi bi-pen-fill"></i></a>
+                <a tal:condition="m.wait" href="/mailing/remove/${m.mailing.id}" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></a>
+                <a tal:condition="m.ready" href="/report/${m.mailing.id}" class="btn btn-outline-success"><i class="bi bi-bar-chart-fill"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
